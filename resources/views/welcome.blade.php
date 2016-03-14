@@ -16,7 +16,7 @@
     @foreach($feeds as $feed)
         <tr>
             <td>{{ $feed->id }}</td>
-            <td>{!! $feed->title !!}</td>
+            <td>{{ $feed->title }}</td>
             <td>{{ $feed->description }}</td>
             <td>{{ $feed->order }}</td>
             <td>{{ $feed->active }}</td>
