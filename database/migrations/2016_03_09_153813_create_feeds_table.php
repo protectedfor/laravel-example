@@ -16,6 +16,8 @@ class CreateFeedsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('description');
+            $table->integer('order');
+            $table->boolean('active');
             $table->timestamps();
         });
     }
