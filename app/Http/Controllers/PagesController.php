@@ -9,7 +9,6 @@ class PagesController extends Controller
 {
     public function getHome()
     {
-        $feeds = Feed::where('active', true)->get();
-        return view('welcome', compact('feeds'));
+        return view('home');
     }
 }
