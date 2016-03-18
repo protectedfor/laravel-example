@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Models\Feed;
+use App\Models\Message;
 
 class PagesController extends Controller
 {
     public function getHome()
     {
-        $feeds = Feed::where('active', true)->get();
-        return view('welcome', compact('feeds'));
+        $messages = Message::all();
+        return view('home', compact('messages'));
     }
 }
