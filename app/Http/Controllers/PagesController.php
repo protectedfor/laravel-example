@@ -9,7 +9,7 @@ class PagesController extends Controller
 {
     public function getHome()
     {
-        $messages = Message::all();
+        $messages = Message::orderBy('created_at', 'DESC')->get();
         return view('home', compact('messages'));
     }
 }
