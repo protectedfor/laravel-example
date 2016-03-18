@@ -33,7 +33,7 @@
 
     @foreach($messages as $message)
         <div class="panel panel-default">
-            <div class="panel-heading">{{ $message->name }}</div>
+            <div class="panel-heading">{{ $message->name }} - {{ $message->created_at->format('d.m.Y H:i:s') }}</div>
             <div class="panel-body">
                 {{ $message->message }}
             </div>
