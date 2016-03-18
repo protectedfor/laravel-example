@@ -30,22 +30,13 @@
         <button type="submit" class="btn btn-default">Отправить</button>
     </form>
     <div style="margin-top: 30px;"></div>
-    <div class="panel panel-default">
-        <div class="panel-heading">Panel heading without title</div>
-        <div class="panel-body">
-            Basic panel example
+
+    @foreach($messages as $message)
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ $message->name }}</div>
+            <div class="panel-body">
+                {{ $message->message }}
+            </div>
         </div>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">Panel heading without title</div>
-        <div class="panel-body">
-            Basic panel example
-        </div>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">Panel heading without title</div>
-        <div class="panel-body">
-            Basic panel example
-        </div>
-    </div>
+    @endforeach
 @endsection
