@@ -12,3 +12,4 @@
 */
 
 Route::get('/', 'PagesController@getHome');
+Route::post('messages', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
