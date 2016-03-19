@@ -13,3 +13,5 @@
 
 Route::get('/', 'PagesController@getHome');
 Route::post('messages', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
+Route::get('books', 'PagesController@getBooks');
+Route::post('books/store', ['as' => 'books.store', 'uses' => 'BooksController@store']);
