@@ -13,8 +13,10 @@ class BooksController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required'
+            'name' => 'required',
+            'description' => 'required|min:50'
         ]);
+        
         Book::create($request->all());
 
         Session::flash('success', true);

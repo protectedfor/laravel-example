@@ -11,7 +11,7 @@ class PagesController extends Controller
     public function getHome()
     {
         $messages = Message::orderBy('created_at', 'DESC')->get();
-        $descriptions = Book::orderBy('created_at', 'DESC')->get();
-        return view('home', compact('descriptions'));
+        $books = Book::orderBy('created_at', 'DESC')->get();
+        return view('home', compact('books'));
     }
 }
