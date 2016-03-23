@@ -17,18 +17,17 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('books.store') }}" method="POST">
-        {!! csrf_field() !!}
-        <div class="form-group">
-            <label for="">Имя</label>
-            <input name="name" value="{{ old('name') }}" type="text" class="form-control" id="" placeholder="">
-        </div>
-        <div class="form-group">
-            <label for="">Сообщение</label>
-            <textarea class="form-control" name="description" id="" cols="30" rows="10">{{ old('description') }}</textarea>
-        </div>
-        <button type="submit" class="btn btn-default">Отправить</button>
-    </form>
+    {!! Form::open(['route' => 'books.store']) !!}
+    <div class="form-group">
+        {!! Form::label('name', 'Имя') !!}
+        {!! Form::text('name', old('name'), ['class' => 'form-control']) !!}
+    </div>
+    <div class="form-group">
+        {!! Form::label('name', 'Сообщение') !!}
+        {!! Form::textarea('description', old('description'), ['class' => 'form-control', 'cols' => '30', 'rows' => '10']) !!}
+    </div>
+    {!! Form::submit('Отправить', ['class' => 'btn btn-default']) !!}
+    {!! Form::close() !!}
     <div style="margin-top: 30px;"></div>
 
     @foreach($books as $book)
