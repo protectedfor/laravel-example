@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Book;
+use App\Models\Message;
+use App\User;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -28,6 +31,18 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot($events);
 
-        //
+        Book::creating(function($book){
+            if(strlen($book->description) <= 6){
+                return false;
+            }
+            return true;
+        });
+
+        Book::created(function($book){
+            Message::create([
+                'name' => $book->description,
+                'message' => 'This message created after book item created'
+            ]);
+        });
     }
 }

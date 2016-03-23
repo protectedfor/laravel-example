@@ -14,7 +14,7 @@ class BooksController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'description' => 'required|min:50'
+            'description' => 'required|min:1'
         ]);
 
         Book::create($request->all());
