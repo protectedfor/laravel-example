@@ -16,7 +16,7 @@ class BooksController extends Controller
             'name' => 'required',
             'description' => 'required|min:50'
         ]);
-        
+
         Book::create($request->all());
 
         Session::flash('success', true);
