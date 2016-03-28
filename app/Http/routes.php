@@ -11,9 +11,17 @@
 |
 */
 
-Route::get('/', 'PagesController@getHome');
-Route::post('books', ['as'=>'books.store', 'uses'=>'BooksController@store']);
+Route::get('/', ['as' => 'home', 'uses' => 'PagesController@getHome']);
+Route::post('books', ['as' => 'books.store', 'uses' => 'BooksController@store']);
 Route::post('messages', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
+
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('works/create', ['as' => 'works.create', 'uses' => 'WorksController@create']);
+    Route::post('works/store', ['as' => 'works.store', 'uses' => 'WorksController@store']);
+});
+
+Route::get('users/{id}', ['as' => 'users.show', 'uses' => 'UsersController@show'])->where('id', '[0-9]+');
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

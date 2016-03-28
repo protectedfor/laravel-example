@@ -4,13 +4,6 @@
     <form method="POST" action="/auth/login">
         {!! csrf_field() !!}
 
-        @if (count($errors) > 0)
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        @endif
 
         <div>
             Email

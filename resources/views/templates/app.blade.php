@@ -17,11 +17,10 @@
 </head>
 <body>
 @include('partials._nav')
+@include('partials._messages')
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
-            @yield('content')
-        </div>
+        @yield('content')
     </div>
 </div>
 </body>

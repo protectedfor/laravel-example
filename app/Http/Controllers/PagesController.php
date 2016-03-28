@@ -11,8 +11,6 @@ class PagesController extends Controller
 {
     public function getHome()
     {
-        $book = Book::find(1);
-        $book->authors;
 //        dd($book->authors);
         $messages = Message::orderBy('created_at', 'DESC')->get();
         $books = Book::orderBy('created_at', 'DESC')->get();
