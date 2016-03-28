@@ -16,4 +16,11 @@ class PagesController extends Controller
         $books = Book::orderBy('created_at', 'DESC')->get();
         return view('home', compact('books'));
     }
+
+    public function getBooks()
+    {
+        $books = Book::orderBy('created_at', 'desc')->get();
+        return view('books', compact('books'));
+    }
+
 }
