@@ -3,9 +3,15 @@
     page1
 @endsection
 @section('content')
+
+    @if(Auth::check())
+        {{ Auth::user()->name }}
+    @endif
+
+
     @if(session('success'))
         <div class="alert alert-success" role="alert">
-            <p>Сообщение добавлено!</p>
+            <p>Книга добавлена!</p>
         </div>
     @endif
     @if(count($errors) > 0)
@@ -17,25 +23,24 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('messages.store') }}" method="POST">
-        {!! csrf_field() !!}
-        <div class="form-group">
-            <label for="">Имя</label>
-            <input name="name" value="{{ old('name') }}" type="text" class="form-control" id="" placeholder="">
-        </div>
-        <div class="form-group">
-            <label for="">Сообщение</label>
-            <textarea class="form-control" name="message" id="" cols="30" rows="10">{{ old('message') }}</textarea>
-        </div>
-        <button type="submit" class="btn btn-default">Отправить</button>
-    </form>
+    {!! Form::open(['route' => 'books.store']) !!}
+    <div class="form-group">
+        {!! Form::label('name', 'Имя') !!}
+        {!! Form::text('name', old('name'), ['class' => 'form-control']) !!}
+    </div>
+    <div class="form-group">
+        {!! Form::label('name', 'Сообщение') !!}
+        {!! Form::textarea('description', old('description'), ['class' => 'form-control', 'cols' => '30', 'rows' => '10']) !!}
+    </div>
+    {!! Form::submit('Отправить', ['class' => 'btn btn-default']) !!}
+    {!! Form::close() !!}
     <div style="margin-top: 30px;"></div>
 
-    @foreach($messages as $message)
+    @foreach($books as $book)
         <div class="panel panel-default">
-            <div class="panel-heading">{{ $message->name }} - {{ $message->created_at->format('d.m.Y H:i:s') }}</div>
+            <div class="panel-heading">{{ $book->name }} - {{ $book->created_at->format('d.m.Y H:i:s') }}</div>
             <div class="panel-body">
-                {{ $message->message }}
+                {{ $book->description }}
             </div>
         </div>
     @endforeach
