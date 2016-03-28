@@ -3,6 +3,12 @@
     page1
 @endsection
 @section('content')
+
+    @if(Auth::check())
+        {{ Auth::user()->name }}
+    @endif
+
+
     @if(session('success'))
         <div class="alert alert-success" role="alert">
             <p>Книга добавлена!</p>
