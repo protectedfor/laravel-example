@@ -11,4 +11,9 @@ class Work extends Model
         'description',
         'user_id'
     ];
+
+    public function photos()
+    {
+        return $this->morphMany(Photo::class, 'imageable');
+    }
 }

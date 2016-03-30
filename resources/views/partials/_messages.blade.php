@@ -1,6 +1,5 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
             @if(session('success'))
                 <div class="alert alert-success" role="alert">
                     <p>{{ session('success') }}</p>
@@ -15,6 +14,5 @@
                     </ul>
                 </div>
             @endif
-        </div>
     </div>
 </div>
