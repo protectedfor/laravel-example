@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use Illuminate\Http\Request;
 use App\Libraries\UploadHandler;
+use Illuminate\Http\Request;
 
 class AjaxController extends Controller
 {
