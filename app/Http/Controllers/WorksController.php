@@ -66,7 +66,8 @@ class WorksController extends Controller
      */
     public function edit($id)
     {
-        $work = Work::get($id);
+        $work = Work::findOrFail($id);
+ //       $work = Work::where('id', '=', $id)->get();
         return view('works.edit', compact('work'));
     }
 
@@ -79,11 +80,8 @@ class WorksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->merge([
-            'user_id' => Auth::id()
-        ]);
-        Work::create($request->all());
-        Session::flash('success', 'Ваша работа добавлена!');
+        Work::update('update works set '($request->all())' where id = ?', [$id]);
+        Session::flash('success', 'Ваша работа отредактирована!');
         return redirect()->route('home');
     }
 
