@@ -80,7 +80,8 @@ class WorksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Work::update('update works set '($request->all())' where id = ?', [$id]);
+        //Work::update('update works set '($request->all())' where id = ?', [$id]);
+        Work::where('id', '=', $id)->update(['title' => $request->title ,'description' => $request->description]);
         Session::flash('success', 'Ваша работа отредактирована!');
         return redirect()->route('home');
     }
