@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Requests\StoreWorkRequest;
 use App\Models\Work;
+use Auth;
 use Illuminate\Http\Request;
 use Session;
-use Auth;
 
 class WorksController extends Controller
 {
@@ -67,7 +67,7 @@ class WorksController extends Controller
     public function edit($id)
     {
         $work = Work::findOrFail($id);
- //       $work = Work::where('id', '=', $id)->get();
+        //       $work = Work::where('id', '=', $id)->get();
         return view('works.edit', compact('work'));
     }
 
@@ -80,8 +80,8 @@ class WorksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //Work::update('update works set '($request->all())' where id = ?', [$id]);
-        Work::where('id', '=', $id)->update(['title' => $request->title ,'description' => $request->description]);
+        $work = Work::findOrFail($id);
+        $work->update($request->all());
         Session::flash('success', 'Ваша работа отредактирована!');
         return redirect()->route('home');
     }
