@@ -23,7 +23,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 Route::group(['prefix' => 'ajax'], function () {
-    Route::match(['post'], 'upload', 'AjaxController@upload');
+    Route::match(['get','post'], 'upload', 'AjaxController@upload');
 });
 
 Route::get('users/{id}', ['as' => 'users.show', 'uses' => 'UsersController@show'])->where('id', '[0-9]+');

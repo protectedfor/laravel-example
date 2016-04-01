@@ -33,7 +33,7 @@ class UploadHandler
     function __construct($options = null, $initialize = true, $error_messages = null) {
         $this->response = array();
         $this->options = array(
-            'script_url' => $this->get_full_url().'/'.basename($this->get_server_var('SCRIPT_NAME')),
+            'script_url' => $this->get_full_url().'/ajax/upload/',
             'upload_dir' => dirname($this->get_server_var('SCRIPT_FILENAME')).'/images/uploads/',
             'upload_url' => $this->get_full_url().'/images/uploads/',
             'input_stream' => 'php://input',
@@ -42,7 +42,7 @@ class UploadHandler
             'param_name' => 'files',
             // Set the following option to 'POST', if your server does not support
             // DELETE requests. This is a parameter sent to the client:
-            'delete_type' => 'DELETE',
+            'delete_type' => 'POST',
             'access_control_allow_origin' => '*',
             'access_control_allow_credentials' => false,
             'access_control_allow_methods' => array(
