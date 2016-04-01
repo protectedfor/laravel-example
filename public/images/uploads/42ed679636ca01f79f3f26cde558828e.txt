@@ -1,0 +1,51 @@
+Composer:
+	composer install
+	composer update
+
+CMD:
+
+cd c:/users/AppData/user_name
+
+cd ../ - вернуться на уровень выше
+
+c:/users/AppData
+
+cd (change direcotry)
+cd /OpenServer/domains
+
+cd D:
+
+ls -l
+ls - список файлов и директорий в текущей директории
+
+mkdir - создать директорию
+touch - создать файл
+CTRL+Shift+C - выделив текст и удерживая ЛКМ копировать из командной строки
+
+master - origin/master
+feature/cart - origin/feature/cart
+
+git init - инциализация гит репозитория в текущей директории
+git branch - список веток проекта и текущая ветка (*)
+git status - статус гит репозитория
+git add . - добавление всех файлов под версионный контроль
+git commit -m "<commit message>" - коммит
+:wq - выйти из редактора коммитов (git bash)
+git log - лог коммитов
+git log -3 - лог последних трех коммитов
+q - для того чтобы выйти из логов
+git revert <commit hash> - возвращает изменения в коммите
+Выйти из окна редактирования коммита ":quit"
+
+git branch <branch_name> - создание ветки <branch_name>
+git checkout <branch_name> - перейти на ветку с имененм <branch_name>
+git checkout -b <branch_name> - создать новую ветку с именем <branch_name> и перейти на нее
+git merge <branch_name> - сливает изменения из ветки <branch_name> в текущую ветку
+git diff - показывает изменения в файлах в соответствии с последним коммитом.
+git reset --hard - сбрасывает все изменения в файлах, которые еще не были закоммичены
+git remote add origin <respository_url>
+git remote -v - список удаленных репозиториев
+git clone <repository_url> - клонирует репозиторий
+git push origin master - пушает изменения в удаленный репозиторий
+git pull origin master - стягивает изменения с удаленного репозитория
+git fetch - стягивает изменения в удаленном репозитории НО не мержит их.
