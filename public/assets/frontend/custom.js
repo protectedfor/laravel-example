@@ -47,5 +47,11 @@ $(function () {
             .call(this, $.Event('done'), {result: result});
     });
 
+    $('.ajax-button').on('click', function (e) {
+        $.post('/ajax/getList', {id: 2, name: 'Vasya'}, function (data) {
+            $('#result').html(data);
+        });
+    });
+
 
 });

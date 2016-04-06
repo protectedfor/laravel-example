@@ -10,9 +10,6 @@ class AjaxController extends Controller
 {
     public function upload(Request $request)
     {
-//        if ($request->method() == 'GET')
-//            return [];
-//        else
-            new UploadHandler();
+        new UploadHandler();
     }
 }
