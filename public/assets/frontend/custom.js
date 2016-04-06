@@ -48,6 +48,8 @@ $(function () {
     });
 
     $('.ajax-button').on('click', function (e) {
+        var first = $('input[name=first]').val();
+        var second = $('input[name=second]').val();
         $.post('/ajax/getList', {id: 2, name: 'Vasya'}, function (data) {
             $('#result').html(data);
         });
