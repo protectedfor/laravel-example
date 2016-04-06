@@ -4,6 +4,8 @@
 @endsection
 @section('content')
 
+
+
     @if(Auth::check())
         <a href="{{ route('works.create') }}" class="btn btn-success">Добавить работу</a>
     @else
@@ -20,23 +22,16 @@
 
 
 
-    {{--{!! Form::open(['route' => 'works.store', 'enctype' => 'multipart/form-data', 'id' => 'fileupload']) !!}--}}
-    {{--<div class="form-group">--}}
-        {{--{!! Form::label('title', 'Название работы') !!}--}}
-        {{--{!! Form::text('title', old('title'), ['class' => 'form-control']) !!}--}}
-    {{--</div>--}}
-    {{--<div class="form-group">--}}
-        {{--<span class="btn btn-success fileinput-button">--}}
-                    {{--<i class="glyphicon glyphicon-plus"></i>--}}
-                    {{--<span>Add files...</span>--}}
-                    {{--<input type="file" name="files[]" multiple/>--}}
-                {{--</span>--}}
-        {{--<table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>--}}
-    {{--</div>--}}
-    {{--<div class="form-group">--}}
-        {{--{!! Form::label('description', 'Описание работы') !!}--}}
-        {{--{!! Form::textarea('description', old('description'), ['class' => 'form-control', 'cols' => '30', 'rows' => '10']) !!}--}}
-    {{--</div>--}}
-    {{--{!! Form::submit('Добавить', ['class' => 'btn btn-default']) !!}--}}
-    {{--{!! Form::close() !!}--}}
+    {!! Form::open(['route' => 'works.store', 'enctype' => 'multipart/form-data', 'class' => 'work_create_form']) !!}
+    <div class="form-group">
+        {!! Form::label('title', 'Название работы') !!}
+        {!! Form::text('title', old('title'), ['class' => 'form-control']) !!}
+    </div>
+    <div class="form-group">
+        {!! Form::label('description', 'Описание работы') !!}
+        {!! Form::textarea('description', old('description'), ['class' => 'form-control', 'cols' => '30', 'rows' => '10']) !!}
+    </div>
+    {!! Form::submit('Добавить', ['class' => 'btn btn-default']) !!}
+    {!! Form::close() !!}
+
 @endsection
