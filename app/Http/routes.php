@@ -48,3 +48,4 @@ Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 Route::post('ajax/getList', 'MessagesController@getList');
+Route::post('ajax/getSum', 'MessagesController@getSum');

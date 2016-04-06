@@ -50,7 +50,7 @@ $(function () {
     $('.ajax-button').on('click', function (e) {
         var first = $('input[name=first]').val();
         var second = $('input[name=second]').val();
-        $.post('/ajax/getList', {id: 2, name: 'Vasya'}, function (data) {
+        $.post('/ajax/getSum', {first: $('first'), second: $('second')}, function (data) {
             $('#result').html(data);
         });
     });
