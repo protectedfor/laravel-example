@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Requests\StoreWorkRequest;
+use App\Models\Photo;
 use App\Models\Work;
+use Auth;
 use Illuminate\Http\Request;
 use Session;
-use Auth;
 
 class WorksController extends Controller
 {
@@ -42,7 +43,16 @@ class WorksController extends Controller
         $request->merge([
             'user_id' => Auth::id()
         ]);
-        Work::create($request->all());
+        $work = Work::create($request->all());
+
+        $imgs = [];
+
+        foreach ($request->images as $img) {
+            $imgs[] = Photo::create(['imageable_id' => $work->id, 'path' => $img]);
+        }
+
+        $work->photos()->saveMany($imgs);
+
         Session::flash('success', 'Ваша работа добавлена!');
         return redirect()->route('home');
     }
@@ -66,7 +76,8 @@ class WorksController extends Controller
      */
     public function edit($id)
     {
-        //
+        $work = Work::findOrFail($id);
+        return view('works.edit', compact('work'));
     }
 
     /**
@@ -78,7 +89,10 @@ class WorksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $work = Work::findOrFail($id);
+        $work->update($request->all());
+        Session::flash('success', 'Ваша работа отредактирована!');
+        return redirect()->route('home');
     }
 
     /**

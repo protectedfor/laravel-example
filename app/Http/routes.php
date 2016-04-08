@@ -19,6 +19,8 @@ Route::post('messages', ['as' => 'messages.store', 'uses' => 'MessagesController
 Route::group(['middleware' => 'auth'], function () {
     Route::get('works/create', ['as' => 'works.create', 'uses' => 'WorksController@create']);
     Route::post('works/store', ['as' => 'works.store', 'uses' => 'WorksController@store']);
+    Route::get('works/{id}/edit', ['as' => 'works.edit', 'uses' => 'WorksController@edit'])->where('id', '[0-9]+');
+    Route::post('works/{id}/update', ['as' => 'works.update', 'uses' => 'WorksController@update'])->where('id', '[0-9]+');
 });
 
 
@@ -44,3 +46,5 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 // Password reset routes...
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
+
+Route::post('ajax/getList', 'MessagesController@getList');
