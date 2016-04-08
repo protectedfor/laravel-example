@@ -1,6 +1,6 @@
 @extends('templates.app')
 @section('content')
-    {!! Form::open(['route' => ['works.update', $work->id], 'enctype' => 'multipart/form-data', 'id' => 'fileupload']) !!}
+    {!! Form::open(['route' => ['works.update', $work->id], 'enctype' => 'multipart/form-data', 'id' => 'fileupload', 'class' => 'work_edit_form']) !!}
     <div class="form-group">
         {!! Form::label('title', 'Название работы') !!}
         {!! Form::text('title', $work->title, ['class' => 'form-control']) !!}

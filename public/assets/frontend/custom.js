@@ -5,9 +5,10 @@ $(function () {
         }
     });
 });
+
+
 $(function () {
     'use strict';
-
 
     // Initialize the jQuery File Upload widget:
     $('#fileupload').fileupload({
@@ -73,5 +74,21 @@ $(function () {
         return false;
     });
 
+    $('.work_edit_form').on('submit', function () {
+        var self = $(this);
+        $.post($(this).attr('action'), $(this).serialize(), function (data) {
+            if (data.success == true)
+                alert(data.message);
+        }).error(function (errors) {
+            var errors = JSON.parse(errors.responseText);
+            var str = '';
+            $.each(errors, function (k, v) {
+                str += v[0] + '\r';
+            });
+            self.find('*[name=' + Object.keys(errors)[0] + ']').focus();
+            alert(str);
+        });
+        return false;
+    });
 
 });

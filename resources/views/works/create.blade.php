@@ -1,6 +1,6 @@
 @extends('templates.app')
 @section('content')
-    {!! Form::open(['route' => 'works.store', 'enctype' => 'multipart/form-data', 'id' => 'fileupload']) !!}
+    {!! Form::open(['route' => 'works.store', 'enctype' => 'multipart/form-data', 'id' => 'fileupload', 'class' => 'work_create_form']) !!}
     <div class="form-group">
         {!! Form::label('title', 'Название работы') !!}
         {!! Form::text('title', old('title'), ['class' => 'form-control']) !!}

@@ -54,7 +54,7 @@ class WorksController extends Controller
             $work->photos()->saveMany($imgs);
         }
 
-        if($request->ajax())
+        if ($request->ajax())
             return ['success' => 1, 'message' => 'Work added successfully!'];
 
         Session::flash('success', 'Ваша работа добавлена!');
@@ -95,6 +95,10 @@ class WorksController extends Controller
     {
         $work = Work::findOrFail($id);
         $work->update($request->all());
+
+        if ($request->ajax())
+            return ['success' => 1, 'message' => 'Work edited successfully!'];
+
         Session::flash('success', 'Ваша работа отредактирована!');
         return redirect()->route('home');
     }
