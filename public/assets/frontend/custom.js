@@ -35,18 +35,18 @@ $(function () {
         );
         // Load existing files:
         imageContainer.addClass('fileupload-processing');
-        $.ajax({
-            // Uncomment the following to send cross-domain cookies:
-            //xhrFields: {withCredentials: true},
-            url: imageContainer.fileupload('option', 'url'),
-            dataType: 'json',
-            context: imageContainer[0]
-        }).always(function () {
-            $(this).removeClass('fileupload-processing');
-        }).done(function (result) {
-            $(this).fileupload('option', 'done')
-                .call(this, $.Event('done'), {result: result});
-        });
+        //$.ajax({
+        //    // Uncomment the following to send cross-domain cookies:
+        //    //xhrFields: {withCredentials: true},
+        //    url: imageContainer.fileupload('option', 'url'),
+        //    dataType: 'json',
+        //    context: imageContainer[0]
+        //}).always(function () {
+        //    $(this).removeClass('fileupload-processing');
+        //}).done(function (result) {
+        //    $(this).fileupload('option', 'done')
+        //        .call(this, $.Event('done'), {result: result});
+        //});
 
     }
 });
