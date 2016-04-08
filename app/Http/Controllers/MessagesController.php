@@ -20,4 +20,15 @@ class MessagesController extends Controller
 
         return redirect()->back();
     }
+
+    public function getList(Request $request)
+    {
+        return [$request->get('name'), $request->get('id')];
+    }
+
+    public function getSum(Request $request)
+    {
+        $sum = $request->get('first') + $request->get('second');
+        return $sum;
+    }
 }

@@ -47,11 +47,15 @@ class WorksController extends Controller
 
         $imgs = [];
 
-        foreach ($request->images as $img) {
-            $imgs[] = Photo::create(['imageable_id' => $work->id, 'path' => $img]);
+        if ($request->images) {
+            foreach ($request->images as $img) {
+                $imgs[] = Photo::create(['imageable_id' => $work->id, 'path' => $img]);
+            }
+            $work->photos()->saveMany($imgs);
         }
 
-        $work->photos()->saveMany($imgs);
+        if ($request->ajax())
+            return ['success' => 1, 'message' => 'Work added successfully!'];
 
         Session::flash('success', 'Ваша работа добавлена!');
         return redirect()->route('home');
@@ -91,6 +95,10 @@ class WorksController extends Controller
     {
         $work = Work::findOrFail($id);
         $work->update($request->all());
+
+        if ($request->ajax())
+            return ['success' => 1, 'message' => 'Work edited successfully!'];
+
         Session::flash('success', 'Ваша работа отредактирована!');
         return redirect()->route('home');
     }
