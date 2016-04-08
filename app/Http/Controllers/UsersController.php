@@ -51,7 +51,7 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
-        $works = $user->works()->with('photos')->paginate(10);
+        $works = $user->works()->with('photos')->paginate(9);
         return view('users.show', compact('works'));
     }
 
