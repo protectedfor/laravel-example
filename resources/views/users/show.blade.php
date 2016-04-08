@@ -14,6 +14,7 @@
                     {{ str_limit($work->description) }}
                 </div>
             </div>
+            {!! $works->render() !!}
         </div>
     @endforeach
 @endsection
