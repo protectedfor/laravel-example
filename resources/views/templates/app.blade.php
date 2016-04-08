@@ -54,9 +54,7 @@
 @include('partials._nav')
 @include('partials._messages')
 <div class="container">
-    <div class="row">
         @yield('content')
-    </div>
 </div>
 </body>
 </html>

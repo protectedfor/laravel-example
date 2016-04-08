@@ -9,6 +9,4 @@
     @else
     <h4>Для того чтобы добавить работу необходимо <a href="{{ url('auth/login') }}">авторизоваться</a></h4>
     @endif
-    <button class="btn btn-success ajax-button">Отправить</button>
-    <p id="result"></p>
 @endsection

@@ -20,8 +20,4 @@ class MessagesController extends Controller
 
         return redirect()->back();
     }
-
-    public function getList(Request $request){
-        return [$request->get('name'), $request->get('id')];
-    }
 }
