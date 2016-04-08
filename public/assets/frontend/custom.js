@@ -6,47 +6,52 @@ $(function () {
     });
 });
 
-
 $(function () {
     'use strict';
+    var imageContainer = $('#fileupload');
+    if (imageContainer.length > 0) {
+        // Initialize the jQuery File Upload widget:
+        imageContainer.fileupload({
+            // Uncomment the following to send cross-domain cookies:
+            //xhrFields: {withCredentials: true},
+            url: '/ajax/upload',
+            done: function (e, data) {
+                $.each(data.result.files, function (index, file) {
+                    $('#fileupload').append($('<input>')
+                        .attr('type', 'hidden')
+                        .attr('name', 'images[]')
+                        .attr('value', file.name));
+                });
+            }
+        });
 
-    // Initialize the jQuery File Upload widget:
-    $('#fileupload').fileupload({
-        // Uncomment the following to send cross-domain cookies:
-        //xhrFields: {withCredentials: true},
-        url: '/ajax/upload',
-        done: function (e, data) {
-            $.each(data.result.files, function (index, file) {
-                $('#fileupload').append($('<input>')
-                    .attr('type', 'hidden')
-                    .attr('name', 'images[]')
-                    .attr('value', file.name));
-            });
-        }
-    });
+        imageContainer.fileupload(
+            'option',
+            'redirect',
+            window.location.href.replace(
+                /\/[^\/]*$/,
+                '/cors/result.html?%s'
+            )
+        );
+        // Load existing files:
+        imageContainer.addClass('fileupload-processing');
+        $.ajax({
+            // Uncomment the following to send cross-domain cookies:
+            //xhrFields: {withCredentials: true},
+            url: imageContainer.fileupload('option', 'url'),
+            dataType: 'json',
+            context: imageContainer[0]
+        }).always(function () {
+            $(this).removeClass('fileupload-processing');
+        }).done(function (result) {
+            $(this).fileupload('option', 'done')
+                .call(this, $.Event('done'), {result: result});
+        });
 
-    $('#fileupload').fileupload(
-        'option',
-        'redirect',
-        window.location.href.replace(
-            /\/[^\/]*$/,
-            '/cors/result.html?%s'
-        )
-    );
-    // Load existing files:
-    $('#fileupload').addClass('fileupload-processing');
-    $.ajax({
-        // Uncomment the following to send cross-domain cookies:
-        //xhrFields: {withCredentials: true},
-        url: $('#fileupload').fileupload('option', 'url'),
-        dataType: 'json',
-        context: $('#fileupload')[0]
-    }).always(function () {
-        $(this).removeClass('fileupload-processing');
-    }).done(function (result) {
-        $(this).fileupload('option', 'done')
-            .call(this, $.Event('done'), {result: result});
-    });
+    }
+});
+
+$(function () {
 
     $('.ajax-button').on('click', function (e) {
         var first = $('input[name=first]').val();
