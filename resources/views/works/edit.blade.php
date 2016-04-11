@@ -1,5 +1,6 @@
 @extends('templates.app')
 @section('content')
+    <span style="display: none;" id="work_id">{{ $work->id }}</span>
     {!! Form::open(['route' => ['works.update', $work->id], 'enctype' => 'multipart/form-data', 'id' => 'fileupload', 'class' => 'work_edit_form']) !!}
     <div class="form-group">
         {!! Form::label('title', 'Название работы') !!}
