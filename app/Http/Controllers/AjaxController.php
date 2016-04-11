@@ -10,6 +10,8 @@ class AjaxController extends Controller
 {
     public function upload(Request $request)
     {
-        new UploadHandler();
+//        new UploadHandler(array(
+//            'accept_file_types' => '/\.(gif|jpe?g|png)$/i'
+//        ));
     }
 }

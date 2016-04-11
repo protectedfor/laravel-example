@@ -22,7 +22,8 @@ $(function () {
                         .attr('name', 'images[]')
                         .attr('value', file.name));
                 });
-            }
+            },
+            autoUpload: true
         });
 
         imageContainer.fileupload(
