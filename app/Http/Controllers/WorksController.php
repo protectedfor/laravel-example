@@ -70,7 +70,9 @@ class WorksController extends Controller
      */
     public function show($id)
     {
-        //
+        $work = Work::findOrFail($id);
+        $work->increment('views');
+        return view('works.show', compact('work'));
     }
 
     /**

@@ -11,7 +11,7 @@
                         @endif
                     </div>
                     <div class="panel-body">
-                        <a href="" class="thumbnail">
+                        <a href="{{ route('works.show', $work->id) }}" class="thumbnail">
                             <img src="{{ $work->mainImage }}" alt="{{ $work->title }}">
                         </a>
                         {{ str_limit($work->description) }}

@@ -54,6 +54,9 @@ return array(
         'works' => function ($img) {
             return $img->fit(150, 200);
         },
+        'work_images' => function ($img) {
+            return $img->fit(1170, 500);
+        },
         'small' => 'Intervention\Image\Templates\Small',
         'medium' => 'Intervention\Image\Templates\Medium',
         'large' => 'Intervention\Image\Templates\Large',

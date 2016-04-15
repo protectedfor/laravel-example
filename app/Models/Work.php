@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Auth;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,5 +29,10 @@ class Work extends Model
     public function photos()
     {
         return $this->morphMany(Photo::class, 'imageable');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
