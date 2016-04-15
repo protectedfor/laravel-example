@@ -9,6 +9,7 @@ use App\Models\Work;
 use Auth;
 use Illuminate\Http\Request;
 use Session;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class WorksController extends Controller
 {
@@ -81,6 +82,8 @@ class WorksController extends Controller
     public function edit($id)
     {
         $work = Work::findOrFail($id);
+        if (!$work->canAccessed())
+            throw new NotFoundHttpException;
         return view('works.edit', compact('work'));
     }
 
@@ -94,6 +97,8 @@ class WorksController extends Controller
     public function update(Request $request, $id)
     {
         $work = Work::findOrFail($id);
+        if (!$work->canAccessed())
+            throw new NotFoundHttpException;
         $work->update($request->all());
 
         $work->photos()->delete();

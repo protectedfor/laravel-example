@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class Work extends Model
@@ -12,15 +13,20 @@ class Work extends Model
         'user_id'
     ];
 
-    public function photos()
+    public function canAccessed()
     {
-        return $this->morphMany(Photo::class, 'imageable');
+        return $this->user_id == Auth::id();
     }
 
     public function getMainImageAttribute()
     {
-        if(count($this->photos) > 0)
+        if (count($this->photos) > 0)
             return route('imagecache', ['works', $this->photos()->first()->path]);
         return 'http://placehold.it/150x200';
+    }
+
+    public function photos()
+    {
+        return $this->morphMany(Photo::class, 'imageable');
     }
 }

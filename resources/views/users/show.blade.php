@@ -6,7 +6,9 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">{{ str_limit($work->title, 25) }}</h3>
-                        <a class="glyphicon glyphicon-pencil" href="{{ route('works.edit', $work->id)  }}" style="float: right;margin-top: -15px;"></a>
+                        @if($work->canAccessed())
+                            <a class="glyphicon glyphicon-pencil" href="{{ route('works.edit', $work->id)  }}" style="float: right;margin-top: -15px;"></a>
+                        @endif
                     </div>
                     <div class="panel-body">
                         <a href="" class="thumbnail">

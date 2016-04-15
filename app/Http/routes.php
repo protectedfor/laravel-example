@@ -20,9 +20,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('works/create', ['as' => 'works.create', 'uses' => 'WorksController@create']);
     Route::get('works/{id}/edit', ['as' => 'works.edit', 'uses' => 'WorksController@edit'])->where('id', '[0-9]+');
     Route::post('works/{id}/update', ['as' => 'works.update', 'uses' => 'WorksController@update'])->where('id', '[0-9]+');
+    Route::post('works/store', ['as' => 'works.store', 'uses' => 'WorksController@store']);
 });
-Route::post('works/store', ['as' => 'works.store', 'uses' => 'WorksController@store']);
-
 
 Route::group(['prefix' => 'ajax'], function () {
     Route::match(['get','post'], 'upload', 'AjaxController@upload');

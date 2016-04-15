@@ -9,8 +9,8 @@
         {!! csrf_field() !!}
 
         <div>
-            Email
-            <input type="email" name="email" value="{{ old('email') }}" class="form-control">
+            <label for="email">Email</label>
+            <input type="email" name="email" value="{{ old('email') }}" class="form-control" id="email">
         </div>
 
         <div>
@@ -19,7 +19,7 @@
         </div>
 
         <div style="display: inline-block; margin-right: 30px;">
-            <input type="checkbox" name="remember"> Remember Me
+            <input type="checkbox" name="remember" id="remember"> <label for="remember">Remember Me</label>
         </div>
         
         <div style="display: inline-block;">
