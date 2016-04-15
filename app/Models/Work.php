@@ -20,7 +20,7 @@ class Work extends Model
     public function getMainImageAttribute()
     {
         if(count($this->photos) > 0)
-            return url('images/uploads/' . $this->photos()->first()->path);
-        return 'http://placehold.it/250x167';
+            return route('imagecache', ['works', $this->photos()->first()->path]);
+        return 'http://placehold.it/150x200';
     }
 }

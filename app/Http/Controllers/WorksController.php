@@ -96,6 +96,18 @@ class WorksController extends Controller
         $work = Work::findOrFail($id);
         $work->update($request->all());
 
+        $work->photos()->delete();
+
+        $imgs = [];
+
+        if ($request->images) {
+            foreach ($request->images as $img) {
+                $imgs[] = Photo::create(['imageable_id' => $work->id, 'path' => $img]);
+            }
+
+            $work->photos()->saveMany($imgs);
+        }
+
         if ($request->ajax())
             return ['success' => 1, 'message' => 'Work edited successfully!'];
 

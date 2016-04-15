@@ -9,7 +9,10 @@
         "laravel/framework": "5.1.*",
         "barryvdh/laravel-debugbar": "^2.2",
         "barryvdh/laravel-ide-helper": "^2.1",
-        "laravelcollective/html": "5.1.*"
+        "laravelcollective/html": "5.1.*",
+        "greggilbert/recaptcha": "dev-master",
+        "intervention/imagecache": "^2.3",
+        "intervention/image": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -37,7 +40,6 @@
         ],
         "pre-update-cmd": [
             "php artisan clear-compiled",
-            "php artisan ide-helper:generate",
             "php artisan optimize"
         ],
         "post-update-cmd": [
