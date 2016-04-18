@@ -14,7 +14,7 @@
                         <a href="{{ route('works.show', $work->id) }}" class="thumbnail">
                             <img src="{{ $work->mainImage }}" alt="{{ $work->title }}">
                         </a>
-                        {{ str_limit($work->description) }}
+                        {{ str_limit(strip_tags($work->description)) }}
                     </div>
                 </div>
             </div>

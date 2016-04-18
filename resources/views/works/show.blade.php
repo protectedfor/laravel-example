@@ -47,7 +47,7 @@
         </tr>
         <tr>
             <td>Описание:</td>
-            <td>{{ $work->description }}</td>
+            <td>{!! $work->description !!}</td>
         </tr>
     </table>
     <div id="disqus_thread"></div>

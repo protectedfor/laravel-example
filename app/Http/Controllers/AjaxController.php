@@ -21,7 +21,7 @@ class AjaxController extends Controller
                     'deleteUrl' => 'null',
                     'name' => $img->path,
                     'size' => '',
-                    'thumbnailUrl' => url('images/uploads/thumbnail/' . $img->path),
+                    'thumbnailUrl' => route('imagecache', ['work_thumbnails', $img->path]),
                     'url' => url('images/uploads/' . $img->path),
                 ];
             }

@@ -8,7 +8,8 @@ class Photo extends Model
 {
 
     protected $fillable = [
-        'path'
+        'path',
+        'imageable_id'
     ];
 
     public function imageable()

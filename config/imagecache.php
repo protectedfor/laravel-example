@@ -32,6 +32,7 @@ return array(
 
     'paths' => array(
         public_path('images/uploads'),
+        public_path(),
     ),
 
     /*
@@ -52,10 +53,13 @@ return array(
 
     'templates' => array(
         'works' => function ($img) {
-            return $img->fit(150, 200);
+            return $img->fit(325, 210);
         },
         'work_images' => function ($img) {
             return $img->fit(1170, 500);
+        },
+        'work_thumbnails' => function ($img) {
+            return $img->fit(120, 120);
         },
         'small' => 'Intervention\Image\Templates\Small',
         'medium' => 'Intervention\Image\Templates\Medium',
