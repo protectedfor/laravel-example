@@ -31,6 +31,7 @@ Route::group(['prefix' => 'ajax'], function () {
 Route::get('users/{id}', ['as' => 'users.show', 'uses' => 'UsersController@show'])->where('id', '[0-9]+');
 
 // Authentication routes...
+Route::post('social/auth', 'Auth\AuthController@postSocialAuth');
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use Validator;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Validator;
 
 class AuthController extends Controller
 {
@@ -36,10 +38,32 @@ class AuthController extends Controller
         $this->middleware('guest', ['except' => 'getLogout']);
     }
 
+    public function postSocialAuth(Request $request)
+    {
+        $token = $request->get('token');
+        $s = file_get_contents('http://ulogin.ru/token.php?token=' . $token . '&host=' . $_SERVER['HTTP_HOST']);
+        $social_user = json_decode($s, true);
+        $email = array_get($social_user, 'email');
+        $user = User::where('email', $email)->first();
+        if(!$user){
+            $created_user = User::create([
+                'name' => array_get($social_user, 'first_name'),
+                'email' => array_get($social_user, 'email'),
+                'password' => '',
+                'photo' => array_get($social_user, 'photo_big'),
+                'uid' => array_get($social_user, 'uid'),
+                'network' => array_get($social_user, 'network'),
+                'identity' => array_get($social_user, 'identity'),
+            ]);
+        }
+        Auth::login($user);
+        return redirect()->route('home');
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -54,7 +78,7 @@ class AuthController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return User
      */
     protected function create(array $data)

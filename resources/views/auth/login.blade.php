@@ -21,7 +21,7 @@
         <div style="display: inline-block; margin-right: 30px;">
             <input type="checkbox" name="remember" id="remember"> <label for="remember">Remember Me</label>
         </div>
-        
+
         <div style="display: inline-block;">
             <a href="{{ url('password/email') }}">Забыли пароль?</a>
         </div>
@@ -30,4 +30,5 @@
             <button type="submit" class="btn btn-success">Login</button>
         </div>
     </form>
+    @include('auth.partials._social_auth_icons')
 @endsection
