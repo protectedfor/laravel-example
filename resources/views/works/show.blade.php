@@ -50,7 +50,18 @@
             <td>{!! $work->description !!}</td>
         </tr>
     </table>
-    <div id="disqus_thread"></div>
+        {{ dd($work->comments) }}
+    {!! Form::open(['route' => 'comment.store', 'enctype' => 'multipart/form-data', 'id' => 'fileupload', 'class' => 'comment_create_form']) !!}
+    <div class="form-group">
+        {!! Form::label('description', 'Комментарий') !!}
+        {!! Form::textarea('description', old('description'), ['class' => 'form-control', 'cols' => '30', 'rows' => '10']) !!}
+    </div>
+    {!! Form::submit('Добавить', ['class' => 'btn btn-default']) !!}
+    {!! Form::close() !!}
+    <div style="margin-top: 30px;"></div>
+
+
+    {{--<div id="disqus_thread"></div>--}}
     <script>
         /**
          * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
