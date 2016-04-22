@@ -50,3 +50,6 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 Route::post('ajax/getList', 'MessagesController@getList');
 Route::post('ajax/getSum', 'MessagesController@getSum');
+
+//users routes
+Route::get('users', ['as' => 'users.index', 'uses' => 'UsersController@index']);

@@ -7,7 +7,7 @@ Admin::model(\App\Models\Work::class)->title('Works')->display(function () {
         Column::image('mainImage')->label('Изображение'),
         Column::string('title')->label('Название'),
         Column::custom()->label('Описание')->callback(function ($instance) {
-            return str_limit($instance->description);
+            return str_limit(strip_tags($instance->description));
         }),
         Column::string('user.name')->label('Пользователь'),
         Column::string('views')->label('Просмотров'),
@@ -22,6 +22,7 @@ Admin::model(\App\Models\Work::class)->title('Works')->display(function () {
 //                FormItem::textarea('description', 'Описание')->required(),
                 FormItem::select('user_id', 'Пользователь')->model(\App\User::class)->display('name'),
                 FormItem::images('images', 'Изображения'),
+                FormItem::text('views', 'Количество просмотров'),
                 FormItem::ckeditor('description', 'Описание'),
 //                FormItem::date('created_at', 'Дата'),
 //                FormItem::time('created_at', 'Время'),
