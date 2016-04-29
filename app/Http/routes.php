@@ -18,9 +18,11 @@ Route::post('messages', ['as' => 'messages.store', 'uses' => 'MessagesController
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('works/create', ['as' => 'works.create', 'uses' => 'WorksController@create']);
+    Route::post('works/store', ['as' => 'works.store', 'uses' => 'WorksController@store']);
     Route::get('works/{id}/edit', ['as' => 'works.edit', 'uses' => 'WorksController@edit'])->where('id', '[0-9]+');
     Route::post('works/{id}/update', ['as' => 'works.update', 'uses' => 'WorksController@update'])->where('id', '[0-9]+');
-    Route::post('works/store', ['as' => 'works.store', 'uses' => 'WorksController@store']);
+
+    Route::post('comments/storeComment/{work_id}', ['as' => 'comments.storeComment', 'uses' => 'WorksController@storeComment'])->where('work_id', '[0-9]+');
 });
 Route::get('works/{id}', ['as' => 'works.show', 'uses' => 'WorksController@show'])->where('id', '[0-9]+');
 

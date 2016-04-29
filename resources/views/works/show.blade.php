@@ -50,7 +50,27 @@
             <td>{!! $work->description !!}</td>
         </tr>
     </table>
-    <div id="disqus_thread"></div>
+    {{--{{ dd($work->id) }}--}}
+
+    @foreach($work->comments as $comment)
+        <div class="panel panel-info">
+            <div class="panel-heading"><span class="label label-success" style="font-size: 16px;margin-right:10px;">{{ $comment->user->name }}</span> {{ $comment->created_at->format('d.m.Y') }}</div>
+            <div class="panel-body">{{ $comment->description }}</div>
+        </div>
+    @endforeach
+{{--    {!! Form::open(['route' => ['comments.storeComment', $work->id], 'enctype' => 'multipart/form-data', 'id' => 'fileupload', 'class' => 'comment_create_form']) !!}--}}
+    {!! Form::open(['route' => ['comments.storeComment', $work->id], 'class' => 'comment_create_form']) !!}
+    {!! Form::radio('work_id', $work->id, true, ['style' => 'display:none;']) !!}
+    <div class="form-group">
+        {!! Form::label('description', 'Комментарий') !!}
+        {!! Form::textarea('description', old('description'), ['class' => 'form-control', 'cols' => '30', 'rows' => '10', 'placeholder' => 'Оставьте свой комментарий...']) !!}
+    </div>
+    {!! Form::submit('Добавить', ['class' => 'btn btn-default']) !!}
+    {!! Form::close() !!}
+    <div style="margin-top: 30px;"></div>
+
+
+    {{--<div id="disqus_thread"></div>--}}
     <script>
         /**
          * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
@@ -62,7 +82,7 @@
          this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
          };
          */
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function () { // DON'T EDIT BELOW THIS LINE
             var d = document, s = d.createElement('script');
 
             s.src = '//laravelexample.disqus.com/embed.js';

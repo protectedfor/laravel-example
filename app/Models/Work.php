@@ -31,6 +31,11 @@ class Work extends Model
         return $this->morphMany(Photo::class, 'imageable');
     }
 
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
     public function setImagesAttribute($images)
     {
         $this->photos()->delete();
