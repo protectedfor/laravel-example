@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Requests\StoreWorkRequest;
+use App\Models\Comment;
 use App\Models\Photo;
 use App\Models\Work;
 use Auth;
@@ -131,5 +132,23 @@ class WorksController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function storeComment(StoreWorkRequest $request)
+    {
+        $work = Work::findOrFail($request->id);
+        $request->merge([
+            'user_id' => Auth::id(),
+        ]);
+
+      // dd($request->all());
+
+             //  $comment = Comment::create(['commentable_id' => $request->id, 'description' => $request->description, 'user_id' => $request->user_id]);
+               $comment = Comment::create($request->all());
+
+        $work->comments()->save($comment);
+
+        Session::flash('success', 'Ваш комментарий добавлен!');
+        return redirect()->back();
     }
 }
