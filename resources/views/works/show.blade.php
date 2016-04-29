@@ -50,11 +50,24 @@
             <td>{!! $work->description !!}</td>
         </tr>
     </table>
-        {{ dd($work->comments) }}
-    {!! Form::open(['route' => 'comment.store', 'enctype' => 'multipart/form-data', 'id' => 'fileupload', 'class' => 'comment_create_form']) !!}
+        {{--{{ dd($work->id) }}--}}
+
+    @foreach($work->comments as $comment)
+        <div class="panel panel-info">
+            <div class="panel-heading"><span class="label label-success" style="font-size: 16px;margin-right:10px;">{{ $comment->user->name }}</span> {{ $comment->created_at->format('d.m.Y') }}</div>
+            <div class="panel-body">{{ $comment->description }}</div>
+        </div>
+    @endforeach
+
+    {{--{!! Form::open(['route' => ['comments.storeComment', $work->id], 'enctype' => 'multipart/form-data', 'id' => 'fileupload', 'class' => 'comment_create_form']) !!}--}}
+    {!! Form::open(['route' => ['comments.storeComment'], 'enctype' => 'multipart/form-data', 'id' => 'fileupload', 'class' => 'comment_create_form']) !!}
+    <div class="form-group" style="display: none;">
+        {!! Form::radio('title', $work->title, true) !!}
+        {!! Form::radio('id', $work->id, true) !!}
+    </div>
     <div class="form-group">
         {!! Form::label('description', 'Комментарий') !!}
-        {!! Form::textarea('description', old('description'), ['class' => 'form-control', 'cols' => '30', 'rows' => '10']) !!}
+        {!! Form::textarea('description', old('description'), ['class' => 'form-control', 'cols' => '30', 'rows' => '10', 'placeholder' => 'Оставьте свой комментарий...']) !!}
     </div>
     {!! Form::submit('Добавить', ['class' => 'btn btn-default']) !!}
     {!! Form::close() !!}
