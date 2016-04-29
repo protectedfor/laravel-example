@@ -15,7 +15,7 @@ class PagesController extends Controller
 //        dd($book->authors);
 //        $messages = Message::orderBy('created_at', 'DESC')->get();
 //        $books = Book::orderBy('created_at', 'DESC')->get();
-        $works = Work::orderBy('views', 'desc')->take(6)->get();
+        $works = Work::with('photos')->orderBy('views', 'desc')->take(6)->get();
         return view('home', compact('works'));
     }
 
