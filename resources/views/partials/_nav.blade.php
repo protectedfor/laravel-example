@@ -14,7 +14,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="@if(Request::url() == route('users.index')) active @endif"><a href="{{ route('users.index') }}">Пользователи <span class="sr-only">(current)</span></a></li>
+                <li class="@if(Request::url() == route('users.index')) active @endif"><a href="{{ route('users.index') }}">{{ trans('sentences.navbar.users') }} <span class="sr-only">(current)</span></a></li>
                 <li><a href="#">Link</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -51,6 +51,19 @@
                     <li><a href="{{ url('auth/login') }}">Вход</a></li>
                     <li><a href="{{ url('auth/register') }}">Регистрация</a></li>
                 @endif
+            </ul>
+{{--            {{ dd(LaravelLocalization::getCurrentLocale()) }}--}}
+            {{--{{ dd(LaravelLocalization::getSupportedLocales()) }}--}}
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ LaravelLocalization::getCurrentLocaleName() }}<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        @foreach(LaravelLocalization::getSupportedLocales() as $k => $locale)
+                            <?php if(LaravelLocalization::getCurrentLocale() == $k) continue; ?>
+                            <li><a href="{{ LaravelLocalization::getLocalizedURL($k) }}">{{ array_get($locale, 'native') }}</a></li>
+                        @endforeach
+                    </ul>
+                </li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

@@ -13,7 +13,8 @@
         "greggilbert/recaptcha": "dev-master",
         "intervention/imagecache": "^2.3",
         "intervention/image": "^2.3",
-        "sleeping-owl/admin": "dev-development"
+        "sleeping-owl/admin": "dev-development",
+        "mcamara/laravel-localization": "1.0.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

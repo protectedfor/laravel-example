@@ -142,6 +142,7 @@ return [
         Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         SleepingOwl\Admin\AdminServiceProvider::class,
+        Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
 
 
         /*
@@ -214,6 +215,7 @@ return [
         'AdminForm'     => 'SleepingOwl\Admin\Form\AdminForm',
         'AdminTemplate' => 'SleepingOwl\Admin\Templates\Facade\AdminTemplate',
         'FormItem'      => 'SleepingOwl\Admin\FormItems\FormItem',
+        'LaravelLocalization'   => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class
 
     ],
 
