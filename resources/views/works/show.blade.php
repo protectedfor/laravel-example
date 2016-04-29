@@ -50,7 +50,7 @@
             <td>{!! $work->description !!}</td>
         </tr>
     </table>
-        {{--{{ dd($work->id) }}--}}
+    {{--{{ dd($work->id) }}--}}
 
     @foreach($work->comments as $comment)
         <div class="panel panel-info">
@@ -58,13 +58,9 @@
             <div class="panel-body">{{ $comment->description }}</div>
         </div>
     @endforeach
-
-    {{--{!! Form::open(['route' => ['comments.storeComment', $work->id], 'enctype' => 'multipart/form-data', 'id' => 'fileupload', 'class' => 'comment_create_form']) !!}--}}
-    {!! Form::open(['route' => ['comments.storeComment'], 'enctype' => 'multipart/form-data', 'id' => 'fileupload', 'class' => 'comment_create_form']) !!}
-    <div class="form-group" style="display: none;">
-        {!! Form::radio('title', $work->title, true) !!}
-        {!! Form::radio('id', $work->id, true) !!}
-    </div>
+{{--    {!! Form::open(['route' => ['comments.storeComment', $work->id], 'enctype' => 'multipart/form-data', 'id' => 'fileupload', 'class' => 'comment_create_form']) !!}--}}
+    {!! Form::open(['route' => ['comments.storeComment', $work->id], 'class' => 'comment_create_form']) !!}
+    {!! Form::radio('work_id', $work->id, true, ['style' => 'display:none;']) !!}
     <div class="form-group">
         {!! Form::label('description', 'Комментарий') !!}
         {!! Form::textarea('description', old('description'), ['class' => 'form-control', 'cols' => '30', 'rows' => '10', 'placeholder' => 'Оставьте свой комментарий...']) !!}
@@ -86,7 +82,7 @@
          this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
          };
          */
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function () { // DON'T EDIT BELOW THIS LINE
             var d = document, s = d.createElement('script');
 
             s.src = '//laravelexample.disqus.com/embed.js';

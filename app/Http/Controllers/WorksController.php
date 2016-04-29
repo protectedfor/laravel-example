@@ -134,17 +134,21 @@ class WorksController extends Controller
         //
     }
 
-    public function storeComment(StoreWorkRequest $request)
+    public function storeComment(Request $request, $work_id)
     {
-        $work = Work::findOrFail($request->id);
+        $this->validate($request, [
+            'description' => 'required'
+        ]);
+        $work = Work::findOrFail($work_id);
+
         $request->merge([
             'user_id' => Auth::id(),
         ]);
 
-      // dd($request->all());
+        // dd($request->all());
 
-             //  $comment = Comment::create(['commentable_id' => $request->id, 'description' => $request->description, 'user_id' => $request->user_id]);
-               $comment = Comment::create($request->all());
+        //  $comment = Comment::create(['commentable_id' => $request->id, 'description' => $request->description, 'user_id' => $request->user_id]);
+        $comment = Comment::create($request->all());
 
         $work->comments()->save($comment);
 
