@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'ru',
 
     /*
     |--------------------------------------------------------------------------
@@ -143,6 +143,8 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         SleepingOwl\Admin\AdminServiceProvider::class,
         Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
+        Dimsav\Translatable\TranslatableServiceProvider::class,
+        \App\Providers\ComposerServiceProvider::class,
 
 
         /*

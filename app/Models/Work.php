@@ -4,13 +4,17 @@ namespace App\Models;
 
 use App\User;
 use Auth;
+use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
 
 class Work extends Model
 {
+
+    use Translatable;
+
+    public $translatedAttributes = ['title', 'description'];
+
     protected $fillable = [
-        'title',
-        'description',
         'user_id'
     ];
 
