@@ -35,7 +35,7 @@ class EventServiceProvider extends ServiceProvider
         parent::boot($events);
         Work::saved(function($entity){
             $imgs = [];
-            foreach (Request::get('images') as $img) {
+            foreach (Request::get('images', []) as $img) {
                 $img = str_replace(config('admin.imagesUploadDirectory') . '/', '', $img);
                 $imgs[] = Photo::create(['imageable_id' => $entity->id, 'path' => $img]);
             }
