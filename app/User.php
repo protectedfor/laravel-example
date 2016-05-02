@@ -36,7 +36,8 @@ class User extends Model implements AuthenticatableContract,
         'photo',
         'uid',
         'network',
-        'identity'
+        'identity',
+        'activation_token'
     ];
 
     /**

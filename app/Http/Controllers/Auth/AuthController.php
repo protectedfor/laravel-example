@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\UserRegisteredEvent;
 use App\Http\Controllers\Controller;
 use App\User;
+use Event;
+use Hash;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Session;
 use Validator;
 
 class AuthController extends Controller
@@ -45,7 +49,7 @@ class AuthController extends Controller
         $social_user = json_decode($s, true);
         $email = array_get($social_user, 'email');
         $user = User::where('email', $email)->first();
-        if(!$user){
+        if (!$user) {
             $created_user = User::create([
                 'name' => array_get($social_user, 'first_name'),
                 'email' => array_get($social_user, 'email'),
@@ -58,6 +62,85 @@ class AuthController extends Controller
         }
         Auth::login($user);
         return redirect()->route('home');
+    }
+
+    /**
+     * Handle a login request to the application.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postLogin(Request $request)
+    {
+        $this->validate($request, [
+            $this->loginUsername() => 'required', 'password' => 'required',
+        ]);
+
+        // If the class is using the ThrottlesLogins trait, we can automatically throttle
+        // the login attempts for this application. We'll key this by the username and
+        // the IP address of the client making these requests into this application.
+        $throttles = $this->isUsingThrottlesLoginsTrait();
+
+        if ($throttles && $this->hasTooManyLoginAttempts($request)) {
+            return $this->sendLockoutResponse($request);
+        }
+
+        $credentials = $this->getCredentials($request);
+
+        $user = User::where('email', array_get($credentials, 'email'))->first();
+        if (!$user->activated) {
+            Session::flash('error', "Пользователь не активирован! Для повторной отправки письма пройдите по <a href=" . route('auth.activate', ['token' => $user->activation_token]) . ">ссылке</a>");
+            return redirect('auth/login');
+        }
+
+        if (Auth::attempt($credentials, $request->has('remember'))) {
+            return $this->handleUserWasAuthenticated($request, $throttles);
+        }
+
+        // If the login attempt was unsuccessful we will increment the number of attempts
+        // to login and redirect the user back to the login form. Of course, when this
+        // user surpasses their maximum number of attempts they will get locked out.
+        if ($throttles) {
+            $this->incrementLoginAttempts($request);
+        }
+
+        return redirect($this->loginPath())
+            ->withInput($request->only($this->loginUsername(), 'remember'))
+            ->withErrors([
+                $this->loginUsername() => $this->getFailedLoginMessage(),
+            ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function postRegister(Request $request)
+    {
+        $validator = $this->validator($request->all());
+
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+        $token = str_random();
+        $request->merge([
+            'activation_token' => $token,
+            'password' => Hash::make($request->get('password'))
+        ]);
+
+//        dd($request->all());
+
+        $user = User::create($request->all());
+
+        $user['activation_token'] = $token;
+
+        Event::fire(new UserRegisteredEvent($user));
+
+        Session::flash('success', 'Инструкция по активации аккаунта отправлена на e-mail: ' . $user->email);
+
+        return redirect($this->redirectPath());
     }
 
     /**
@@ -75,18 +158,24 @@ class AuthController extends Controller
         ]);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array $data
-     * @return User
-     */
-    protected function create(array $data)
+    public function activate(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        $token = $request->get('token');
+        $user = User::where('activation_token', $token)->first();
+        if (!$user) {
+            Session::flash('error', 'Пользователь не найден!');
+            return redirect()->route('home');
+        }
+        if ($user->activated) {
+            Session::flash('success', 'Пользователь уже активирован!');
+            return redirect()->route('home');
+        }
+
+        $user->activated = true;
+        $user->activation_token = null;
+        $user->save();
+        Session::flash('success', 'Пользователь успешно активирован!');
+        Auth::login($user);
+        return redirect()->route('home');
     }
 }

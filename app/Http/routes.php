@@ -55,6 +55,8 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
+Route::get('auth/activate', ['as' => 'auth.activate', 'uses' => 'Auth\AuthController@activate']);
+
 Route::group(['prefix' => 'ajax'], function () {
     Route::match(['get', 'post'], 'upload', 'AjaxController@upload');
     Route::post('getList', 'MessagesController@getList');

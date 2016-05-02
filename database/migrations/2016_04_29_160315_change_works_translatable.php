@@ -22,8 +22,8 @@ class ChangeWorksTranslatable extends Migration
 
             $table->string('title');
             $table->text('description');
-            $table->string('locale')->index();
 
+            $table->string('locale')->index();
             $table->unique(['work_id','locale']);
             $table->foreign('work_id')->references('id')->on('works')->onDelete('cascade');
         });
