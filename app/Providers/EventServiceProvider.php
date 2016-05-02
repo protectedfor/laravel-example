@@ -4,9 +4,12 @@ namespace App\Providers;
 
 use App\Models\Book;
 use App\Models\Message;
+use App\Models\Photo;
+use App\Models\Work;
 use App\User;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Request;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -30,19 +33,13 @@ class EventServiceProvider extends ServiceProvider
     public function boot(DispatcherContract $events)
     {
         parent::boot($events);
-
-        Book::creating(function($book){
-            if(strlen($book->description) <= 6){
-                return false;
-            }
-            return true;
-        });
-
-        Book::created(function($book){
-            Message::create([
-                'name' => $book->description,
-                'message' => 'This message created after book item created'
-            ]);
-        });
+//        Work::saved(function($entity){
+//            $imgs = [];
+//            foreach (Request::get('images') as $img) {
+//                $img = str_replace(config('admin.imagesUploadDirectory') . '/', '', $img);
+//                $imgs[] = Photo::create(['imageable_id' => $entity->id, 'path' => $img]);
+//            }
+//            $entity->photos()->saveMany($imgs);
+//        });
     }
 }

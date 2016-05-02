@@ -10,14 +10,7 @@ return [
     | Contains an array with the applications available locales.
     |
     */
-    'locales' => [
-        'en',
-        'ru',
-//        'es' => [
-//            'MX', // mexican spanish
-//            'CO', // colombian spanish
-//        ],
-    ],
+    'locales' => ['en', 'ru'],
 
     /*
     |--------------------------------------------------------------------------
@@ -41,7 +34,7 @@ return [
     | you can specify what default should be used here.
     |
     */
-    'locale' => 'ru',
+//    'locale' => 'ru',
 
     /*
     |--------------------------------------------------------------------------

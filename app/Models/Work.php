@@ -15,6 +15,7 @@ class Work extends Model
     public $translatedAttributes = ['title', 'description'];
 
     protected $fillable = [
+        'images',
         'user_id'
     ];
 
@@ -43,12 +44,6 @@ class Work extends Model
     public function setImagesAttribute($images)
     {
         $this->photos()->delete();
-        $imgs = [];
-        foreach ($images as $img) {
-            $img = str_replace(config('admin.imagesUploadDirectory') . '/', '', $img);
-            $imgs[] = Photo::create(['imageable_id' => $this->id, 'path' => $img]);
-        }
-        $this->photos()->saveMany($imgs);
     }
 
     public function getImagesAttribute()

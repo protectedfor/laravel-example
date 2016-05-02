@@ -12,6 +12,9 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 | and give it the controller to call when that URI is requested.
 |
 */
+
+Route::post('social/auth', 'Auth\AuthController@postSocialAuth');
+
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
     'middleware' => [ 'localeSessionRedirect', 'localizationRedirect' ]
@@ -34,7 +37,6 @@ Route::group([
     Route::get('users/{id}', ['as' => 'users.show', 'uses' => 'UsersController@show'])->where('id', '[0-9]+');
 
 // Authentication routes...
-    Route::post('social/auth', 'Auth\AuthController@postSocialAuth');
     Route::get('auth/login', 'Auth\AuthController@getLogin');
     Route::post('auth/login', 'Auth\AuthController@postLogin');
     Route::get('auth/logout', 'Auth\AuthController@getLogout');

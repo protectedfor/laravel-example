@@ -14,6 +14,8 @@ class AjaxController extends Controller
         if ($request->method() == "GET") {
             $work_id = $request->get('work_id');
             $work = Work::find($work_id);
+            if(!$work)
+                return ['files' => []];
             $imgs = [];
             foreach ($work->photos as $img) {
                 $imgs[] = [
