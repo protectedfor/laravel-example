@@ -4,8 +4,6 @@
 @endsection
 @section('content')
 
-
-
     @if(Auth::check())
         <a href="{{ route('works.create') }}" class="btn btn-success">Добавить работу</a>
     @else
@@ -15,7 +13,7 @@
 
     <div class="row" style="margin-top: 15px;">
         @foreach($works as $work)
-            <div class="col-md-4">
+            <div class="col-md-4 work-block">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">{{ str_limit($work->title, 25) }}<span class="badge pull-right">{{ $work->views }}</span></h3>

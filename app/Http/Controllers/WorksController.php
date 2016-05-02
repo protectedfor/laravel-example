@@ -11,6 +11,7 @@ use Auth;
 use Illuminate\Http\Request;
 use Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use App;
 
 class WorksController extends Controller
 {
@@ -34,18 +35,22 @@ class WorksController extends Controller
         return view('works.create');
     }
 
+
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param StoreWorkRequest $request
+     * @return array|\Illuminate\Http\RedirectResponse
      */
     public function store(StoreWorkRequest $request)
     {
-        $request->merge([
-            'user_id' => Auth::id()
-        ]);
-        $work = Work::create($request->all());
+        $data = [
+            'user_id' => Auth::id(),
+            App::getLocale() => [
+                'title' => $request->title,
+                'description' => $request->description
+            ]
+        ];
+//        dd($data);
+        $work = Work::create($data);
 
         $imgs = [];
 
@@ -102,7 +107,16 @@ class WorksController extends Controller
         $work = Work::findOrFail($id);
         if (!$work->canAccessed())
             throw new NotFoundHttpException;
-        $work->update($request->all());
+
+
+        $data = [
+            App::getLocale() => [
+                'title' => $request->title,
+                'description' => $request->description
+            ]
+        ];
+
+        $work->update($data);
 
         $work->photos()->delete();
 

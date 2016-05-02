@@ -9,13 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Work extends Model
 {
-
     use Translatable;
 
     public $translatedAttributes = ['title', 'description'];
 
     protected $fillable = [
-        'images',
+        'title',
+        'description',
         'user_id'
     ];
 
