@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Role;
 use App\Models\Work;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -20,14 +21,12 @@ class User extends Model implements AuthenticatableContract,
     protected $dates = [
         'activation_request_date'
     ];
-
     /**
      * The database table used by the model.
      *
      * @var string
      */
     protected $table = 'users';
-
     /**
      * The attributes that are mass assignable.
      *
@@ -43,7 +42,6 @@ class User extends Model implements AuthenticatableContract,
         'identity',
         'activation_token'
     ];
-
     /**
      * The attributes excluded from the model's JSON form.
      *
@@ -51,6 +49,19 @@ class User extends Model implements AuthenticatableContract,
      */
     protected $hidden = ['password', 'remember_token'];
 
+    public function setRolesAttribute($roles)
+    {
+        $this->roles()->detach();
+        if ( ! $roles) return;
+        if ( ! $this->exists) $this->save();
+
+        $this->roles()->attach($roles);
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
 
     public function works()
     {
