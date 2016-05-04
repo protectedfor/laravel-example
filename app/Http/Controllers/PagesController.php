@@ -12,8 +12,7 @@ class PagesController extends Controller
 {
     public function getHome(Request $request)
     {
-        $works = Work::with('photos')->orderBy('views', 'desc')->take(6)->get();
-        return view('home', compact('works'));
+        return view('home');
     }
 
     public function getBooks()
