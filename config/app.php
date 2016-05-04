@@ -147,6 +147,7 @@ return [
         Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
         Dimsav\Translatable\TranslatableServiceProvider::class,
         \App\Providers\ComposerServiceProvider::class,
+        Baum\Providers\BaumServiceProvider::class,
 
 
         /*

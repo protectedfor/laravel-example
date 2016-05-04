@@ -1,7 +1,7 @@
 <?php
 
 Admin::model('App\User')->title('Users')->display(function () {
-    $display = AdminDisplay::table();
+    $display = AdminDisplay::datatables();
     $display->columns([
         Column::string('id')->label('#'),
         Column::string('name')->label('Name'),

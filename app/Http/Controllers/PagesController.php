@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Models\Book;
+use App\Models\Category;
 use App\Models\Work;
 use Illuminate\Http\Request;
 use Mail;
@@ -12,7 +13,8 @@ class PagesController extends Controller
 {
     public function getHome(Request $request)
     {
-        return view('home');
+        $categories = Category::roots()->get();
+        return view('home', compact('categories'));
     }
 
     public function getBooks()
