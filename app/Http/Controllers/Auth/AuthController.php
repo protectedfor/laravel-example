@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Events\UserRegisteredEvent;
 use App\Http\Controllers\Controller;
 use App\User;
+use Carbon\Carbon;
 use Event;
 use Hash;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -89,7 +90,7 @@ class AuthController extends Controller
 
         $user = User::where('email', array_get($credentials, 'email'))->first();
         if (!$user->activated) {
-            Session::flash('error', "Пользователь не активирован! Для повторной отправки письма пройдите по <a href=" . route('auth.activate', ['token' => $user->activation_token]) . ">ссылке</a>");
+            Session::flash('error', "Пользователь не активирован! Для повторной отправки письма пройдите по <a href=" . route('auth.send_activation', ['user_id' => $user->id]) . ">ссылке</a>");
             return redirect('auth/login');
         }
 
@@ -109,6 +110,32 @@ class AuthController extends Controller
             ->withErrors([
                 $this->loginUsername() => $this->getFailedLoginMessage(),
             ]);
+    }
+
+    public function sendActivation(Request $request, $user_id)
+    {
+        $user = User::find($user_id);
+        if (!$user) {
+            Session::flash('error', 'Пользователь не найден');
+            return redirect('auth/login');
+        }
+        $user['activation_token'] = $user->activation_token;
+
+
+        $diff = Carbon::now()->diffInSeconds($user->activation_request_date);
+
+        if($diff < config('app.activation_code_limit')){
+            Session::flash('error', 'Для повторной отправки письма нужно подождать ' . (config('app.activation_code_limit') - $diff) . ' ' . trans_choice('секунд|секунды|секунду', (config('app.activation_code_limit') - $diff)));
+            return redirect('auth/login');
+        }
+
+        $user->activation_request_date = Carbon::now();
+        $user->save();
+
+        Event::fire(new UserRegisteredEvent($user));
+
+        Session::flash('success', 'Ссылка с инструкцией по активации отправлена на ' . $user->email);
+        return redirect('auth/login');
     }
 
     /**

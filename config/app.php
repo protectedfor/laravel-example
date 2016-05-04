@@ -2,6 +2,8 @@
 
 return [
 
+    'activation_code_limit' => 300,
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode

@@ -56,6 +56,7 @@ Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 Route::get('auth/activate', ['as' => 'auth.activate', 'uses' => 'Auth\AuthController@activate']);
+Route::get('auth/send_activation/{user_id}', ['as' => 'auth.send_activation', 'uses' => 'Auth\AuthController@sendActivation'])->where('user_id', '[0-9]+');
 
 Route::group(['prefix' => 'ajax'], function () {
     Route::match(['get', 'post'], 'upload', 'AjaxController@upload');
