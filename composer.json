@@ -18,7 +18,8 @@
         "dimsav/laravel-translatable": "^5.1",
         "baum/baum": "~1.1",
         "davejamesmiller/laravel-breadcrumbs": "^3.0",
-        "cviebrock/eloquent-sluggable": "^3.0"
+        "cviebrock/eloquent-sluggable": "^3.0",
+        "nicolaslopezj/searchable": "1.*"
 
     },
     "require-dev": {

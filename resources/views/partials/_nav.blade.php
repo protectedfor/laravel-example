@@ -29,11 +29,11 @@
                     </ul>
                 </li>
             </ul>
-            <form class="navbar-form navbar-left" role="search">
+            <form class="navbar-form navbar-left" role="search" action="{{ route('home') }}">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input type="text" name="query" value="{{ Request::get('query') }}" class="form-control" placeholder="{{ trans('sentences.search.placeholder') }}">
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submit" class="btn btn-default">{{ trans('sentences.search.button') }}</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
                 @if(Auth::check())

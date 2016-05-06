@@ -13,8 +13,12 @@ class PagesController extends Controller
 {
     public function getHome(Request $request)
     {
+        $works = Work::with('photos')->orderBy('views', 'desc')->take(6)->get();
+        if($query = $request->get('query')){
+            $works = Work::search($query)->get();
+        }
         $categories = Category::roots()->get();
-        return view('home', compact('categories'));
+        return view('home', compact('categories', 'works'));
     }
 
     public function getBooks()

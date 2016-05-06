@@ -6,10 +6,11 @@ use App\User;
 use Auth;
 use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
+use Nicolaslopezj\Searchable\SearchableTrait;
 
 class Work extends Model
 {
-    use Translatable;
+    use Translatable, SearchableTrait;
 
     public $translatedAttributes = ['title', 'description', 'slug'];
 
@@ -18,6 +19,16 @@ class Work extends Model
         'description',
         'user_id',
         'slug'
+    ];
+
+    protected $searchable = [
+        'columns' => [
+            'work_translations.title' => 10,
+            'work_translations.description' => 10,
+        ],
+        'joins' => [
+            'work_translations' => ['works.id','work_translations.work_id'],
+        ],
     ];
 
     public function canAccessed()
