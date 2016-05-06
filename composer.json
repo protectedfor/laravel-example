@@ -16,7 +16,9 @@
         "sleeping-owl/admin": "dev-development",
         "mcamara/laravel-localization": "1.0.*",
         "dimsav/laravel-translatable": "^5.1",
-        "baum/baum": "~1.1"
+        "baum/baum": "~1.1",
+        "davejamesmiller/laravel-breadcrumbs": "^3.0",
+        "cviebrock/eloquent-sluggable": "^3.0"
 
     },
     "require-dev": {

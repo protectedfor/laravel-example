@@ -1,5 +1,6 @@
 @extends('templates.app')
 @section('content')
+    {!! Breadcrumbs::render('works_create') !!}
     {!! Form::open(['route' => 'works.store', 'enctype' => 'multipart/form-data', 'id' => 'fileupload', 'class' => 'work_create_form']) !!}
     <div class="form-group">
         {!! Form::label('title', 'Название работы') !!}

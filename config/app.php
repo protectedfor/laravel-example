@@ -148,6 +148,7 @@ return [
         Dimsav\Translatable\TranslatableServiceProvider::class,
         \App\Providers\ComposerServiceProvider::class,
         Baum\Providers\BaumServiceProvider::class,
+        DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
 
 
         /*
@@ -220,8 +221,8 @@ return [
         'AdminForm'     => 'SleepingOwl\Admin\Form\AdminForm',
         'AdminTemplate' => 'SleepingOwl\Admin\Templates\Facade\AdminTemplate',
         'FormItem'      => 'SleepingOwl\Admin\FormItems\FormItem',
-        'LaravelLocalization'   => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class
-
+        'LaravelLocalization'   => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
+        'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
     ],
 
 ];

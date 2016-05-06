@@ -53,7 +53,7 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
         $works = $user->works()->with('photos')->paginate(9);
-        return view('users.show', compact('works'));
+        return view('users.show', compact('works', 'user'));
     }
 
     /**

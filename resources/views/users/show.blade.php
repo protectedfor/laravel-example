@@ -1,5 +1,6 @@
 @extends('templates.app')
 @section('content')
+    {!! Breadcrumbs::render('users_show', $user) !!}
     <div class="row">
         @foreach($works as $work)
             <div class="col-md-4">
