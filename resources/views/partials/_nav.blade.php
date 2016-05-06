@@ -52,16 +52,18 @@
                     <li><a href="{{ url('auth/register') }}">Регистрация</a></li>
                 @endif
             </ul>
-{{--            {{ dd(LaravelLocalization::getCurrentLocale()) }}--}}
+            {{--            {{ dd(LaravelLocalization::getCurrentLocale()) }}--}}
             {{--{{ dd(LaravelLocalization::getSupportedLocales()) }}--}}
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ LaravelLocalization::getCurrentLocaleName() }}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        @foreach(LaravelLocalization::getSupportedLocales() as $k => $locale)
-                            <?php if(LaravelLocalization::getCurrentLocale() == $k) continue; ?>
-                            <li><a href="{{ LaravelLocalization::getLocalizedURL($k) }}">{{ array_get($locale, 'native') }}</a></li>
-                        @endforeach
+                        @section('localization')
+                            @foreach(LaravelLocalization::getSupportedLocales() as $k => $locale)
+                                <?php if (LaravelLocalization::getCurrentLocale() == $k) continue; ?>
+                                <li><a href="{{ LaravelLocalization::getLocalizedURL($k) }}">{{ array_get($locale, 'native') }}</a></li>
+                            @endforeach
+                        @show
                     </ul>
                 </li>
             </ul>

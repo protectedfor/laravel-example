@@ -149,6 +149,7 @@ return [
         \App\Providers\ComposerServiceProvider::class,
         Baum\Providers\BaumServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
+        Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
 
 
         /*

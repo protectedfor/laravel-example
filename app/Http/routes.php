@@ -32,14 +32,16 @@ Route::group([
 
         Route::post('comments/storeComment/{work_id}', ['as' => 'comments.storeComment', 'uses' => 'WorksController@storeComment'])->where('work_id', '[0-9]+');
     });
-    Route::get('works/{id}', ['as' => 'works.show', 'uses' => 'WorksController@show'])->where('id', '[0-9]+');
+    Route::get('works/{slug}', ['as' => 'works.show', 'uses' => 'WorksController@show'])->where('id', '[0-9]+');
 
+//users routes
+    Route::get('users', ['as' => 'users.index', 'uses' => 'UsersController@index']);
     Route::get('users/{id}', ['as' => 'users.show', 'uses' => 'UsersController@show'])->where('id', '[0-9]+');
 
+    Route::get('auth/login', 'Auth\AuthController@getLogin');
 });
 
 // Authentication routes...
-Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
@@ -63,6 +65,3 @@ Route::group(['prefix' => 'ajax'], function () {
     Route::post('getList', 'MessagesController@getList');
     Route::post('getSum', 'MessagesController@getSum');
 });
-
-//users routes
-Route::get('users', ['as' => 'users.index', 'uses' => 'UsersController@index']);

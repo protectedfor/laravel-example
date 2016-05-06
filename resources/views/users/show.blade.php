@@ -12,7 +12,7 @@
                         @endif
                     </div>
                     <div class="panel-body">
-                        <a href="{{ route('works.show', $work->id) }}" class="thumbnail">
+                        <a href="{{ route('works.show', $work->slug) }}" class="thumbnail">
                             <img src="{{ $work->mainImage }}" alt="{{ $work->title }}">
                         </a>
                         {{ str_limit(strip_tags($work->description)) }}

@@ -1,4 +1,12 @@
 @extends('templates.app')
+
+@section('localization')
+    @foreach(LaravelLocalization::getSupportedLocales() as $k => $locale)
+        <?php if (LaravelLocalization::getCurrentLocale() == $k) continue; ?>
+        <li><a href="{{ LaravelLocalization::getLocalizedURL($k, route('works.show', [$work->translate($k)->slug])) }}">{{ array_get($locale, 'native') }}</a></li>
+    @endforeach
+@stop
+
 @section('content')
     <h2>{{ $work->title }} <span class="badge">{{ $work->views }}</span></h2>
 
@@ -58,7 +66,7 @@
             <div class="panel-body">{{ $comment->description }}</div>
         </div>
     @endforeach
-{{--    {!! Form::open(['route' => ['comments.storeComment', $work->id], 'enctype' => 'multipart/form-data', 'id' => 'fileupload', 'class' => 'comment_create_form']) !!}--}}
+    {{--    {!! Form::open(['route' => ['comments.storeComment', $work->id], 'enctype' => 'multipart/form-data', 'id' => 'fileupload', 'class' => 'comment_create_form']) !!}--}}
     {!! Form::open(['route' => ['comments.storeComment', $work->id], 'class' => 'comment_create_form']) !!}
     {!! Form::radio('work_id', $work->id, true, ['style' => 'display:none;']) !!}
     <div class="form-group">

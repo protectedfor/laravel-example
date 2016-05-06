@@ -11,12 +11,13 @@ class Work extends Model
 {
     use Translatable;
 
-    public $translatedAttributes = ['title', 'description'];
+    public $translatedAttributes = ['title', 'description', 'slug'];
 
     protected $fillable = [
         'title',
         'description',
-        'user_id'
+        'user_id',
+        'slug'
     ];
 
     public function canAccessed()

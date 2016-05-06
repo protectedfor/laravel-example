@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use App\Http\Requests;
 use App\Http\Requests\StoreWorkRequest;
 use App\Models\Comment;
@@ -11,7 +12,6 @@ use Auth;
 use Illuminate\Http\Request;
 use Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use App;
 
 class WorksController extends Controller
 {
@@ -71,12 +71,17 @@ class WorksController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param $slug
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $work = Work::findOrFail($id);
+        $work = Work::whereHas('translations', function ($query) use ($slug) {
+            $query->where('locale', App::getLocale())
+                ->where('slug', $slug);
+        })->first();
+        if (!$work)
+            throw new NotFoundHttpException;
         $work->increment('views');
         return view('works.show', compact('work'));
     }

@@ -6,6 +6,7 @@ Admin::model(\App\Models\Work::class)->title('Works')->display(function () {
         Column::string('id')->label('#'),
         Column::image('mainImage')->label('Изображение'),
         Column::string('title')->label('Название'),
+        Column::string('slug')->label('ЧПУ'),
         Column::custom()->label('Описание')->callback(function ($instance) {
             return str_limit(strip_tags($instance->description));
         }),
@@ -19,6 +20,7 @@ Admin::model(\App\Models\Work::class)->title('Works')->display(function () {
         FormItem::columns()->columns([
             [
                 FormItem::text('title', 'Название')->required(),
+                FormItem::text('slug', 'ЧПУ'),
 //                FormItem::textarea('description', 'Описание')->required(),
                 FormItem::select('user_id', 'Пользователь')->model(\App\User::class)->display('name'),
                 FormItem::images('images', 'Изображения'),
