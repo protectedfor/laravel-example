@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Work;
 use Illuminate\Http\Request;
 use Mail;
+use App;
 
 class PagesController extends Controller
 {

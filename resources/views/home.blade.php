@@ -15,7 +15,7 @@
         @foreach($works as $work)
             <div class="col-md-4 work-block">
                 <div class="panel panel-default">
-                    <div class="panel-heading">
+                    <div class="panel-heading" style="min-height: 38px;">
                         <h3 class="panel-title">{{ str_limit($work->title, 25) }}<span class="badge pull-right">{{ $work->views }}</span></h3>
                         @if($work->canAccessed())
                             <a class="glyphicon glyphicon-pencil" href="{{ route('works.edit', $work->id)  }}" style="float: right;margin-top: -15px;"></a>
